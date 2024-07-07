@@ -75,65 +75,61 @@
       <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
       <AssemblyReference>UiPath.Workflow</AssemblyReference>
       <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.ViewModels</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="496,681" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="450,377" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="TelegramMessageToSend" />
       <Variable x:TypeArguments="ss:SecureString" Name="api" />
       <Variable x:TypeArguments="x:String" Name="token" />
       <Variable x:TypeArguments="x:String" Name="responseContent" />
       <Variable x:TypeArguments="x:Int32" Name="responsesStatus" />
+      <Variable x:TypeArguments="x:String" Name="ec_username" />
+      <Variable x:TypeArguments="ss:SecureString" Name="ec_pw" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Assign sap2010:Annotation.AnnotationText="String formatted to be readable by Telegram." sap:VirtualizedContainerService.HintSize="434,113" sap2010:WorkflowViewState.IdRef="Assign_1">
-      <Assign.To>
-        <OutArgument x:TypeArguments="x:String">[TelegramMessageToSend]</OutArgument>
-      </Assign.To>
-      <Assign.Value>
-        <InArgument x:TypeArguments="x:String">New homework detected</InArgument>
-      </Assign.Value>
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
-    </Assign>
-    <ui:GetRobotCredential TimeoutMS="{x:Null}" Username="{x:Null}" AssetName="Telegram_API" CacheStrategy="None" DisplayName="Get Credential" FolderPath="Development/Ryan Chee" sap:VirtualizedContainerService.HintSize="434,143" sap2010:WorkflowViewState.IdRef="GetRobotCredential_1" Password="[api]" />
-    <Assign DisplayName="Private: Assign" sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_2">
-      <Assign.To>
-        <OutArgument x:TypeArguments="x:String">[token]</OutArgument>
-      </Assign.To>
-      <Assign.Value>
-        <InArgument x:TypeArguments="x:String">[new System.Net.NetworkCredential(string.Empty, api).Password]</InArgument>
-      </Assign.Value>
-    </Assign>
-    <ui:HttpClient Body="{x:Null}" ClientCertificate="{x:Null}" ClientCertificatePassword="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" FileAttachments="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" Password="{x:Null}" ResourcePath="{x:Null}" ResponseAttachment="{x:Null}" ResponseHeaders="{x:Null}" SecureClientCertificatePassword="{x:Null}" SecurePassword="{x:Null}" Username="{x:Null}" AcceptFormat="JSON" sap2010:Annotation.AnnotationText="Send telegram text messages.&#xA;Using table blocks." AuthenticationType="None" BodyFormat="application/json" DisplayName="Private: HTTP Request" EnableSSLVerification="True" EndPoint="[&quot;https://api.telegram.org/bot&quot;+token+&quot;/sendMessage&quot;]" sap:VirtualizedContainerService.HintSize="434,112" sap2010:WorkflowViewState.IdRef="HttpClient_1" Method="POST" Result="[responseContent]" StatusCode="[responsesStatus]" TimeoutMS="6000">
-      <ui:HttpClient.Attachments>
-        <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
-      </ui:HttpClient.Attachments>
-      <ui:HttpClient.Cookies>
-        <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
-      </ui:HttpClient.Cookies>
-      <ui:HttpClient.Headers>
-        <InArgument x:TypeArguments="x:String" x:Key="Authorization">[token]</InArgument>
-      </ui:HttpClient.Headers>
-      <ui:HttpClient.Parameters>
-        <InArgument x:TypeArguments="x:String" x:Key="text">[TelegramMessageToSend]</InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="chat_id">-4217148770</InArgument>
-      </ui:HttpClient.Parameters>
-      <ui:HttpClient.UrlSegments>
-        <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
-      </ui:HttpClient.UrlSegments>
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
-    </ui:HttpClient>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="proc_Telegram_API.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="proc_Telegram_API.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="in_TelegramMessageToSend">
+          <Literal x:TypeArguments="x:String">Checking for online homework if any...</Literal>
+        </InArgument>
+        <OutArgument x:TypeArguments="ss:SecureString" x:Key="out_api">
+          <VisualBasicReference x:TypeArguments="ss:SecureString" ExpressionText="api" />
+        </OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="out_token">
+          <VisualBasicReference x:TypeArguments="x:String" ExpressionText="token" />
+        </OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="out_ec_username">
+          <VisualBasicReference x:TypeArguments="x:String" ExpressionText="ec_username" />
+        </OutArgument>
+        <OutArgument x:TypeArguments="ss:SecureString" x:Key="out_ec_pw">
+          <VisualBasicReference x:TypeArguments="ss:SecureString" ExpressionText="ec_pw" />
+        </OutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="proc_Open_Browser.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="proc_Open_Browser.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="in_ec_username">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="ec_username" />
+        </InArgument>
+        <InArgument x:TypeArguments="ss:SecureString" x:Key="in_ec_pw">
+          <VisualBasicValue x:TypeArguments="ss:SecureString" ExpressionText="ec_pw" />
+        </InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
   </Sequence>
 </Activity>
